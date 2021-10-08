@@ -1,3 +1,4 @@
+function LexicalCharacterDisplacement(~)
 %% Simulate Lexical Character Displacement 
 %
 % This script was used to generate the simulation of degemination and
@@ -14,8 +15,8 @@ rng(60)
 
 %% Model parameters
 
-muDurSingleton= 125;
-muDurIG= 75;
+muDurIG= 125;
+muDurSingleton= 75;
 sigma= 15; % standard deviation
 nExemplars= 100; % n exemplars in each population
 nEntranchment= 3 ; % n exemplars used to calculate production target by taking
@@ -27,10 +28,10 @@ noise= 25; % noise added to production is uniformly distributed in
 %% Initialize Populations
 
 % Singleton Population N(muDurSingleton, sigma)
-NSingleton= randn(1,nExemplars)*sigma+muDurIG;
+NSingleton= randn(1,nExemplars)*sigma+muDurSingleton;
 
 % IGs Population N(muDurIG, sigma)
-NGeminate= randn(1,nExemplars)*sigma+muDurSingleton;
+NGeminate= randn(1,nExemplars)*sigma+muDurIG;
 
 %% Plot initial position of singleton and IG in closure duration space
 
@@ -38,7 +39,7 @@ bw= 8; % bandwidth for ksd
 C= colororder; % get Matlab default colors
 
 % Figure
-figure;
+f = figure('WindowState','fullscreen');
 subplot(6,6,[7 8 9 13 14 15 19 20 21 25 26 27]);  hold on;
 
 % Plot filled ksdensities
@@ -101,6 +102,12 @@ t= title("c)","FontSize",20,"Fontname","Fira Sans");
 t.Position(1)= 20;
 t.Position(2)= 0.038;
 hold off;
+
+saveas(f,"LexicalCharacterDisplacement.png")
+close all
+
+fprintf("The Lexical Character Displacement \n model has been printed\n")
+end
 
 %% Local Functions
 
